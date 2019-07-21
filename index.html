@@ -11,6 +11,7 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   
 </head>
 
 <body>
@@ -53,7 +54,7 @@
 
     <div class="container WinsLossesRanNum bg-info">
         <div class="row">
-            <div class="col randomeNum" style="height: 200px;">
+            <div class="col randomeNum">
                 <div class="row">
                     <h3>Random Number:</h3>
                 </div>
@@ -107,87 +108,7 @@
             </div>
         </div>
     </div>
-
-
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            let wins = 0;
-            let losses = 0;
-            let score = 0;
-            let valRandomDisplayInt = valRandomDisplay();
-
-            function valRandomDisplay() {
-                const value = Math.floor(Math.random() * 120) + 12;
-                value.toString();
-                return value;
-            };
-
-            function valRandomCrystals() {
-                const value = Math.floor(Math.random() * 12) + 1;
-                value.toString();
-                return value;
-            };
-
-            $("#blue").attr("value", valRandomCrystals());
-            $("#purple").attr("value", valRandomCrystals());
-            $("#white").attr("value", valRandomCrystals());
-            $("#yellow").attr("value", valRandomCrystals());
-            $(".randomeNumberDisplay").append("<p>" + valRandomDisplayInt);
-            $(".ourWins").append("<p>" + wins);
-            $(".ourLosses").append("<p>" + losses);
-            $(".scoreDisplay").append(score);
-
-            $(".myThumbnail").on("click", function () {
-                score = score + parseInt($(this).attr("value"));
-                $(".scoreDisplay").empty();
-                $(".scoreDisplay").append(score);
-
-                console.log("score=" + score + " valRandomDisplayInt=" + valRandomDisplayInt);
-                if (score == valRandomDisplayInt) {
-                    wins++;
-                    valRandomDisplayInt = valRandomDisplay();
-                    $("#blue").attr("value", valRandomCrystals());
-                    $("#purple").attr("value", valRandomCrystals());
-                    $("#white").attr("value", valRandomCrystals());
-                    $("#yellow").attr("value", valRandomCrystals());
-                    score = 0;
-
-                    $(".randomeNumberDisplay").empty();
-                    $(".randomeNumberDisplay").append("<p>" + valRandomDisplayInt)
-                    $(".ourWins").empty();
-                    $(".ourWins").append("<p>" + wins);
-
-           
-
-                }
-                if (score > valRandomDisplayInt) {
-                    losses++;
-                    valRandomDisplayInt = valRandomDisplay();
-                    $("#blue").attr("value", valRandomCrystals());
-                    $("#purple").attr("value", valRandomCrystals());
-                    $("#white").attr("value", valRandomCrystals());
-                    $("#yellow").attr("value", valRandomCrystals());
-                    score = 0;
-                    $(".randomeNumberDisplay").empty();
-                    $(".randomeNumberDisplay").append("<p>" + valRandomDisplayInt)
-                    $(".ourLosses").empty();
-                    $(".ourLosses").append("<p>" + losses);
-                }
-
-            });
-
-
-
-        });
-
-
-
-    </script>
-
-
-
-
+    <script src="./assets/javascript/game.js"></script>
 </body>
 
 </html>
