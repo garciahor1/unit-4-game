@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container header text-center bg-dark">
+        <div class="row">
+            <div class="col">
+                <h1 class="text-white">Diamond in the Rough</h1>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container main">
+        <div class="row">
+            <div class="col">
+                <ol>
+                    <li>
+                        <h2>Instructions/Mission</h2>
+                    </li>
+                    <li>
+                        <p>You are given a random number.</p>
+                    </li>
+                    <li>
+                        <p>You are provided with 4 diamonds.</p>
+                    </li>
+                    <li>
+                        <p>Each diamond has an assigned value between 1-12.</p>
+                    </li>
+                    <li>
+                        <p>Your mission, if you choose to accept, is:</p>
+                    </li>
+                    <li>
+                        <p> To match the random number with your score using the diamond's hidden values.</p>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <div class="container WinsLossesRanNum bg-info">
+        <div class="row">
+            <div class="col randomeNum" style="height: 200px;">
+                <div class="row">
+                    <h3>Random Number:</h3>
+                </div>
+                <div class="row randomeNumberDisplay ">
+
+                </div>
+            </div>
+            <div class="col winsLosses">
+                <div class="row">
+                    <h3>WINS AND LOSSES</h3>
+                </div>
+                <div class="row wins bg-success">
+                    <div class="col">
+                        <p>Wins:</p>
+                    </div>
+                    <div class="col ourWins"></div>
+                </div>
+                <div class="row losses bg-danger">
+                    <div class="col">
+                        <p>Losses:</p>
+                    </div>
+                    <div class="col ourLosses"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container CrystalsContainer bg-dark">
+        <div class="row crystals">
+
+            <div class="col"> <img class="img-thumbnail myThumbnail" src="./assets/images/blue.jpg" alt="Blue" id="blue"
+                    value=""> </div>
+            <div class="col"> <img class="img-thumbnail myThumbnail" src="./assets/images/purple.jpg" alt="purple"
+                    id="purple" value=""></div>
+            <div class="col "> <img class="img-thumbnail myThumbnail" src="./assets/images/white.jpg" alt="white"
+                    id="white" value=""></div>
+            <div class="col "> <img class="img-thumbnail myThumbnail" src="./assets/images/yellow.jpg" alt="yellow"
+                    id="yellow" value=""></div>
+        </div>
+    </div>
+
+    <div class="container bg-info">
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <h3>Your score is:</h3>
+                </div>
+                <div class="row">
+                    <p class="info scoreDisplay"> </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            let wins = 0;
+            let losses = 0;
+            let score = 0;
+            let valRandomDisplayInt = valRandomDisplay();
+
+            function valRandomDisplay() {
+                const value = Math.floor(Math.random() * 120) + 12;
+                value.toString();
+                return value;
+            };
+
+            function valRandomCrystals() {
+                const value = Math.floor(Math.random() * 12) + 1;
+                value.toString();
+                return value;
+            };
+
+            $("#blue").attr("value", valRandomCrystals());
+            $("#purple").attr("value", valRandomCrystals());
+            $("#white").attr("value", valRandomCrystals());
+            $("#yellow").attr("value", valRandomCrystals());
+            $(".randomeNumberDisplay").append("<p>" + valRandomDisplayInt);
+            $(".ourWins").append("<p>" + wins);
+            $(".ourLosses").append("<p>" + losses);
+            $(".scoreDisplay").append(score);
+
+            $(".myThumbnail").on("click", function () {
+                score = score + parseInt($(this).attr("value"));
+                $(".scoreDisplay").empty();
+                $(".scoreDisplay").append(score);
+
+                console.log("score=" + score + " valRandomDisplayInt=" + valRandomDisplayInt);
+                if (score == valRandomDisplayInt) {
+                    wins++;
+                    valRandomDisplayInt = valRandomDisplay();
+                    $("#blue").attr("value", valRandomCrystals());
+                    $("#purple").attr("value", valRandomCrystals());
+                    $("#white").attr("value", valRandomCrystals());
+                    $("#yellow").attr("value", valRandomCrystals());
+                    score = 0;
+
+                    $(".randomeNumberDisplay").empty();
+                    $(".randomeNumberDisplay").append("<p>" + valRandomDisplayInt)
+                    $(".ourWins").empty();
+                    $(".ourWins").append("<p>" + wins);
+
+           
+
+                }
+                if (score > valRandomDisplayInt) {
+                    losses++;
+                    valRandomDisplayInt = valRandomDisplay();
+                    $("#blue").attr("value", valRandomCrystals());
+                    $("#purple").attr("value", valRandomCrystals());
+                    $("#white").attr("value", valRandomCrystals());
+                    $("#yellow").attr("value", valRandomCrystals());
+                    score = 0;
+                    $(".randomeNumberDisplay").empty();
+                    $(".randomeNumberDisplay").append("<p>" + valRandomDisplayInt)
+                    $(".ourLosses").empty();
+                    $(".ourLosses").append("<p>" + losses);
+                }
+
+            });
+
+
+
+        });
+
+
+
+    </script>
+
+
+
+
+</body>
+
+</html>

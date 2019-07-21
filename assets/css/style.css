@@ -1,0 +1,27 @@
+.myThumbnail
+{
+    width: 200px; 
+    height: 200px;
+    object-fit: cover;
+}
+.info
+{
+    font-size: 30px;
+}
+
+.randomeNumberDisplay
+{
+    font-size: 100px;
+}
+.winsLosses{
+    font-size: 30px;
+}
+
+.wins{
+width:200px;
+}
+
+.losses{
+    width:200px;
+}
+
